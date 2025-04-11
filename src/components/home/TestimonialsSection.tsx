@@ -6,23 +6,23 @@ import Image from 'next/image';
 const testimonials = [
   {
     id: 1,
-    name: 'Sarah Johnson',
+    name: 'Shrey',
     role: 'Homeowner',
-    image: 'https://randomuser.me/api/portraits/women/1.jpg',
+    image: 'https://randomuser.me/api/portraits/men/1.jpg',
     quote: 'Dream Design Studio transformed our house into a stunning home that perfectly reflects our style and needs. Their attention to detail and creative solutions exceeded our expectations. The team was professional, responsive, and a joy to work with throughout the entire process.',
   },
   {
     id: 2,
-    name: 'Michael Chen',
+    name: 'Ritanshu',
     role: 'Business Owner',
     image: 'https://randomuser.me/api/portraits/men/2.jpg',
     quote: 'Working with Dream Design Studio on our office renovation was an excellent experience. They understood our brand and created a space that impresses clients while enhancing our team\'s productivity. Their ability to balance aesthetics with functionality is truly remarkable.',
   },
   {
     id: 3,
-    name: 'Emily Rodriguez',
+    name: 'Himanshu',
     role: 'Restaurant Owner',
-    image: 'https://randomuser.me/api/portraits/women/3.jpg',
+    image: 'https://randomuser.me/api/portraits/men/3.jpg',
     quote: 'The team at Dream Design Studio designed a restaurant space that has become a talking point among our customers. Their innovative approach and understanding of our concept resulted in a unique dining environment that enhances the overall experience. Highly recommended!',
   },
 ];
@@ -115,3 +115,4 @@ export default function TestimonialsSection() {
     </section>
   );
 }
+

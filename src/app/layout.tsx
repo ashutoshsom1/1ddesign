@@ -15,7 +15,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Dream Design Studio | Architecture & Interior Design",
+  title: "1D-Design Studio | Architecture & Interior Design",
   description: "Premium architecture and interior design services for residential and commercial spaces.",
 };
 
@@ -38,3 +38,6 @@ export default function RootLayout({
     </html>
   );
 }
+
+
+

@@ -16,5 +16,23 @@
     "service": "renovation",
     "message": "HIII",
     "date": "2025-04-08T21:43:43.774Z"
+  },
+  {
+    "id": "1744183239766",
+    "name": "Ashutosh Somvanshi",
+    "email": "ashutosh.somvanshi@nihilent.com",
+    "phone": "09133864535",
+    "service": "architecture",
+    "message": "ddd",
+    "date": "2025-04-09T07:20:39.766Z"
+  },
+  {
+    "id": "1744224817340",
+    "name": "Sriajn",
+    "email": "ashutosomva5@gmail.com",
+    "phone": "06394256455",
+    "service": "architecture",
+    "message": "Hi design studio",
+    "date": "2025-04-09T18:53:37.340Z"
   }
 ]
