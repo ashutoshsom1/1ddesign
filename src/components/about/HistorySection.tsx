@@ -10,7 +10,7 @@ export default function HistorySection() {
           <div>
             <h2 className="text-3xl md:text-4xl font-bold mb-6">Our Story</h2>
             <p className="text-gray-600 mb-6">
-              Dream Design Studio was founded in 2008 with a vision to create spaces that inspire, function beautifully, and stand the test of time. What began as a small team of passionate designers has grown into a full-service architecture and interior design firm with a reputation for excellence.
+              Dream Design Studio was founded in 2015 with a vision to create spaces that inspire, function beautifully, and stand the test of time. What began as a small team of passionate designers has grown into a full-service architecture and interior design firm with a reputation for excellence.
             </p>
             <p className="text-gray-600 mb-6">
               Over the years, we've had the privilege of working on a diverse range of projects, from luxury residential homes to commercial spaces, each with its unique challenges and opportunities. Our journey has been marked by a commitment to innovation, quality, and client satisfaction.

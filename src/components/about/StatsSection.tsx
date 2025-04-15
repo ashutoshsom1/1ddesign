@@ -3,22 +3,22 @@ import React from 'react';
 const stats = [
   {
     id: 1,
-    value: '15+',
+    value: '10+',
     label: 'Years Experience',
   },
   {
     id: 2,
-    value: '200+',
+    value: '50+',
     label: 'Projects Completed',
   },
   {
     id: 3,
-    value: '50+',
+    value: '10+',
     label: 'Awards Won',
   },
   {
     id: 4,
-    value: '95%',
+    value: '100%',
     label: 'Client Satisfaction',
   },
 ];
@@ -39,3 +39,4 @@ export default function StatsSection() {
     </section>
   );
 }
+
