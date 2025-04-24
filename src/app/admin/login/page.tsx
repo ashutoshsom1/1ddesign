@@ -11,7 +11,7 @@ export default function AdminLogin() {
 
   // In a real application, you would use a secure authentication system
   // This is a simple example with a hardcoded password
-  const ADMIN_PASSWORD = 'admin123'; // This should be stored securely in environment variables
+  // The password is handled by the API route
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();

@@ -16,7 +16,7 @@ const testimonials = [
     name: 'Ritanshu',
     role: 'Business Owner',
     image: 'https://randomuser.me/api/portraits/men/2.jpg',
-    quote: 'Working with Dream Design Studio on our office renovation was an excellent experience. They understood our brand and created a space that impresses clients while enhancing our team\'s productivity. Their ability to balance aesthetics with functionality is truly remarkable.',
+    quote: 'Working with Dream Design Studio on our office renovation was an excellent experience. They understood our brand and created a space that impresses clients while enhancing our team&apos;s productivity. Their ability to balance aesthetics with functionality is truly remarkable.',
   },
   {
     id: 3,
@@ -44,7 +44,7 @@ export default function TestimonialsSection() {
         <div className="text-center mb-16">
           <h2 className="text-3xl md:text-4xl font-bold mb-4">What Our Clients Say</h2>
           <p className="text-xl text-gray-300 max-w-3xl mx-auto">
-            Don't just take our word for it. Here's what our clients have to say about working with Dream Design Studio.
+            Don&apos;t just take our word for it. Here&apos;s what our clients have to say about working with Dream Design Studio.
           </p>
         </div>
 
@@ -56,7 +56,7 @@ export default function TestimonialsSection() {
 
             <div className="relative">
               <div className="mb-8">
-                <p className="text-xl italic leading-relaxed">"{testimonials[activeIndex].quote}"</p>
+                <p className="text-xl italic leading-relaxed">&quot;{testimonials[activeIndex].quote}&quot;</p>
               </div>
 
               <div className="flex items-center">

@@ -8,7 +8,7 @@ export default function ContactPage() {
       <div className="container mx-auto px-4">
         <h1 className="text-4xl font-bold text-center mb-6">Contact Us</h1>
         <p className="text-center text-lg mb-16 max-w-3xl mx-auto">
-          We'd love to hear from you. Reach out to discuss your project or schedule a consultation.
+          We&apos;d love to hear from you. Reach out to discuss your project or schedule a consultation.
         </p>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 max-w-6xl mx-auto">
@@ -44,7 +44,7 @@ export default function ContactPage() {
         <div className="mt-20">
           <h2 className="text-2xl font-bold text-center mb-8">Find Us</h2>
           <div className="h-96 rounded-lg overflow-hidden">
-            <iframe 
+            <iframe
               src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3499.8876151865396!2d77.42972850000001!3d28.7017128!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390cf13957cd5395%3A0x8553b63632c0324f!2sKW%20SRISHTI-2%2C%20Raj%20Nagar%20Extension%2C%20Ghaziabad%2C%20Delhi%2C%20Uttar%20Pradesh%20201003!5e0!3m2!1sen!2sin!4v1650000000000!5m2!1sen!2sin"
               width="100%"
               height="100%"
