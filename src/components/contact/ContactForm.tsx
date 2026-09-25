@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
-import { Send, CheckCircle2, AlertCircle } from "lucide-react";
+import { Send, CheckCircle2, AlertCircle, MessageSquare, ArrowUpRight } from "lucide-react";
 
 export default function ContactForm() {
   const [formData, setFormData] = useState({
@@ -13,6 +13,7 @@ export default function ContactForm() {
   });
 
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [whatsappActionUrl, setWhatsappActionUrl] = useState<string | null>(null);
   const [submitStatus, setSubmitStatus] = useState<{
     success?: boolean;
     message?: string;
@@ -32,6 +33,12 @@ export default function ContactForm() {
     e.preventDefault();
     setIsSubmitting(true);
     setSubmitStatus(null);
+    setWhatsappActionUrl(null);
+
+    const submissionPayload = {
+      ...formData,
+      date: new Date().toISOString(),
+    };
 
     try {
       const response = await fetch("/api/contact", {
@@ -39,17 +46,23 @@ export default function ContactForm() {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({
-          ...formData,
-          date: new Date().toISOString(),
-        }),
+        body: JSON.stringify(submissionPayload),
       });
 
       if (response.ok) {
+        const resData = await response.json();
+        
+        // Use server-generated WhatsApp URL or generate client-side link
+        const fallbackUrl = `https://wa.me/917827473377?text=${encodeURIComponent(
+          `🏛️ *NEW ARCHITECTURAL CONSULTATION BOOKING*\n*1 Dream Design Atelier*\n━━━━━━━━━━━━━━━━━━━━━━━━\n👤 *Client:* ${formData.name}\n📞 *Phone:* ${formData.phone || 'Not provided'}\n✉️ *Email:* ${formData.email}\n📐 *Typology:* ${formData.service}\n📝 *Brief:* "${formData.message}"`
+        )}`;
+
+        setWhatsappActionUrl(resData.whatsapp?.whatsappUrl || fallbackUrl);
         setSubmitStatus({
           success: true,
-          message: "Thank you for reaching out. A Principal Architect will contact you within 24 hours.",
+          message: "Consultation brief received by 1 Dream Design Studio atelier. Our Principal Architect has been alerted.",
         });
+
         setFormData({
           name: "",
           email: "",
@@ -90,19 +103,43 @@ export default function ContactForm() {
       </div>
 
       {submitStatus && (
-        <div
-          className={`p-4 rounded-xl text-xs flex items-start space-x-3 ${
-            submitStatus.success
-              ? "bg-emerald-500/10 border border-emerald-500/30 text-emerald-300"
-              : "bg-red-500/10 border border-red-500/30 text-red-300"
-          }`}
-        >
-          {submitStatus.success ? (
-            <CheckCircle2 className="w-4 h-4 shrink-0 mt-0.5 text-emerald-400" />
-          ) : (
-            <AlertCircle className="w-4 h-4 shrink-0 mt-0.5 text-red-400" />
+        <div className="space-y-4">
+          <div
+            className={`p-4 rounded-xl text-xs flex items-start space-x-3 ${
+              submitStatus.success
+                ? "bg-emerald-500/10 border border-emerald-500/30 text-emerald-300"
+                : "bg-red-500/10 border border-red-500/30 text-red-300"
+            }`}
+          >
+            {submitStatus.success ? (
+              <CheckCircle2 className="w-4 h-4 shrink-0 mt-0.5 text-emerald-400" />
+            ) : (
+              <AlertCircle className="w-4 h-4 shrink-0 mt-0.5 text-red-400" />
+            )}
+            <span>{submitStatus.message}</span>
+          </div>
+
+          {submitStatus.success && whatsappActionUrl && (
+            <div className="p-5 rounded-2xl bg-[#0b1410] border border-emerald-500/30 space-y-3">
+              <div className="flex items-center space-x-2 text-emerald-300 text-xs font-mono uppercase tracking-wider">
+                <MessageSquare className="w-4 h-4 text-emerald-400" />
+                <span>{"// Real-Time WhatsApp Dispatch"}</span>
+              </div>
+              <p className="text-xs text-zinc-300 leading-relaxed">
+                For immediate priority booking with our Principal Architect, click below to forward your consultation brief directly to our official studio WhatsApp:
+              </p>
+              <a
+                href={whatsappActionUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group inline-flex items-center justify-center space-x-2 w-full py-3.5 px-5 rounded-xl text-xs font-semibold uppercase tracking-wider text-zinc-950 bg-gradient-to-r from-emerald-400 via-teal-300 to-emerald-400 hover:from-emerald-300 hover:to-teal-200 transition-all shadow-lg shadow-emerald-500/20 hover:scale-[1.01] active:scale-[0.99]"
+              >
+                <MessageSquare className="w-4 h-4" />
+                <span>Confirm on WhatsApp (+91 78274 73377)</span>
+                <ArrowUpRight className="w-4 h-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+              </a>
+            </div>
           )}
-          <span>{submitStatus.message}</span>
         </div>
       )}
 

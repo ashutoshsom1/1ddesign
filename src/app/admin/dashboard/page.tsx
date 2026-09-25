@@ -104,12 +104,24 @@ export default function AdminDashboard() {
                       <td className="py-3 px-4">{submission.email}</td>
                       <td className="py-3 px-4">{submission.service}</td>
                       <td className="py-3 px-4">
-                        <button
-                          onClick={() => setSelectedSubmission(submission)}
-                          className="text-blue-600 hover:text-blue-800"
-                        >
-                          View Details
-                        </button>
+                        <div className="flex items-center space-x-3">
+                          <button
+                            onClick={() => setSelectedSubmission(submission)}
+                            className="text-blue-600 hover:text-blue-800 font-medium"
+                          >
+                            View Details
+                          </button>
+                          {submission.phone && (
+                            <a
+                              href={`https://wa.me/${submission.phone.replace(/[^0-9]/g, '')}?text=${encodeURIComponent(`Hello ${submission.name}, thank you for your consultation request with 1 Dream Design Studio regarding ${submission.service}.`)}`}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="text-emerald-600 hover:text-emerald-800 text-xs font-semibold px-2.5 py-1 bg-emerald-50 hover:bg-emerald-100 rounded-md border border-emerald-200 transition-colors"
+                            >
+                              WhatsApp
+                            </a>
+                          )}
+                        </div>
                       </td>
                     </tr>
                   ))}
@@ -171,10 +183,20 @@ export default function AdminDashboard() {
                 </div>
               </div>
               
-              <div className="mt-6 flex justify-end">
+              <div className="mt-6 flex justify-end space-x-3">
+                {selectedSubmission.phone && (
+                  <a
+                    href={`https://wa.me/${selectedSubmission.phone.replace(/[^0-9]/g, '')}?text=${encodeURIComponent(`Hello ${selectedSubmission.name}, thank you for reaching out to 1 Dream Design Studio regarding ${selectedSubmission.service}. I would love to discuss your project.`)}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="bg-emerald-600 text-white px-4 py-2 rounded-md hover:bg-emerald-700 transition duration-300 text-sm font-medium flex items-center space-x-1.5"
+                  >
+                    <span>Reply via WhatsApp</span>
+                  </a>
+                )}
                 <button
                   onClick={() => setSelectedSubmission(null)}
-                  className="bg-gray-200 text-gray-800 px-4 py-2 rounded-md hover:bg-gray-300 transition duration-300"
+                  className="bg-gray-200 text-gray-800 px-4 py-2 rounded-md hover:bg-gray-300 transition duration-300 text-sm"
                 >
                   Close
                 </button>
