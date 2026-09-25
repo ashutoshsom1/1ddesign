@@ -22,7 +22,9 @@ export default function BeforeAfterSlider() {
   );
 
   const handleTouchMove = (e: React.TouchEvent) => {
-    handleMove(e.touches[0].clientX);
+    if (e.touches && e.touches[0]) {
+      handleMove(e.touches[0].clientX);
+    }
   };
 
   const handleMouseMove = (e: React.MouseEvent) => {
