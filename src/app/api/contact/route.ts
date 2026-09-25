@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { saveSubmission, getSubmissions } from '@/lib/supabase';
-import { sendWhatsAppNotification } from '@/lib/whatsappNotification';
+import { sendEmailNotification } from '@/lib/emailNotification';
 
 export const dynamic = 'force-dynamic';
 
@@ -26,8 +26,8 @@ export async function POST(request: NextRequest) {
       message: body.message
     });
 
-    // Trigger WhatsApp notification to the Principal Architect
-    const whatsappResult = await sendWhatsAppNotification({
+    // Trigger Email notification to the Principal Architect (1dreamdesignstudioo@gmail.com)
+    const emailResult = await sendEmailNotification({
       name: body.name,
       email: body.email,
       phone: body.phone || null,
@@ -39,7 +39,7 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({ 
       success: true, 
       data: submission,
-      whatsapp: whatsappResult
+      email: emailResult
     }, { status: 201 });
   } catch (error) {
     console.error('Error processing contact form submission:', error);

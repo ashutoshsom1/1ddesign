@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
-import { Send, CheckCircle2, AlertCircle, MessageSquare, ArrowUpRight } from "lucide-react";
+import { Send, CheckCircle2, AlertCircle, Mail, ArrowUpRight } from "lucide-react";
 
 export default function ContactForm() {
   const [formData, setFormData] = useState({
@@ -13,7 +13,7 @@ export default function ContactForm() {
   });
 
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [whatsappActionUrl, setWhatsappActionUrl] = useState<string | null>(null);
+  const [mailActionUrl, setMailActionUrl] = useState<string | null>(null);
   const [submitStatus, setSubmitStatus] = useState<{
     success?: boolean;
     message?: string;
@@ -33,7 +33,7 @@ export default function ContactForm() {
     e.preventDefault();
     setIsSubmitting(true);
     setSubmitStatus(null);
-    setWhatsappActionUrl(null);
+    setMailActionUrl(null);
 
     const submissionPayload = {
       ...formData,
@@ -52,15 +52,16 @@ export default function ContactForm() {
       if (response.ok) {
         const resData = await response.json();
         
-        // Use server-generated WhatsApp URL or generate client-side link
-        const fallbackUrl = `https://wa.me/917827473377?text=${encodeURIComponent(
-          `🏛️ *NEW ARCHITECTURAL CONSULTATION BOOKING*\n*1 Dream Design Atelier*\n━━━━━━━━━━━━━━━━━━━━━━━━\n👤 *Client:* ${formData.name}\n📞 *Phone:* ${formData.phone || 'Not provided'}\n✉️ *Email:* ${formData.email}\n📐 *Typology:* ${formData.service}\n📝 *Brief:* "${formData.message}"`
+        const fallbackMailto = `mailto:1dreamdesignstudioo@gmail.com?subject=${encodeURIComponent(
+          `New Spatial Consultation: ${formData.name} - ${formData.service}`
+        )}&body=${encodeURIComponent(
+          `Client Name: ${formData.name}\nEmail: ${formData.email}\nPhone: ${formData.phone || 'Not provided'}\nTypology: ${formData.service}\n\nBrief:\n${formData.message}`
         )}`;
 
-        setWhatsappActionUrl(resData.whatsapp?.whatsappUrl || fallbackUrl);
+        setMailActionUrl(resData.email?.mailtoUrl || fallbackMailto);
         setSubmitStatus({
           success: true,
-          message: "Consultation brief received by 1 Dream Design Studio atelier. Our Principal Architect has been alerted.",
+          message: "Consultation brief received. An email notification has been dispatched to 1dreamdesignstudioo@gmail.com.",
         });
 
         setFormData({
@@ -78,7 +79,7 @@ export default function ContactForm() {
       console.error("Error submitting form:", error);
       setSubmitStatus({
         success: false,
-        message: "There was an error submitting your message. Please reach out to us directly via WhatsApp (+91 78274 73377).",
+        message: "There was an error submitting your message. Please email us directly at 1dreamdesignstudioo@gmail.com.",
       });
     } finally {
       setIsSubmitting(false);
@@ -98,7 +99,7 @@ export default function ContactForm() {
           Initiate Spatial Consultation
         </h3>
         <p className="text-xs text-zinc-400 mt-1">
-          Fill out the brief below or contact our atelier directly via WhatsApp.
+          Fill out the brief below to receive an architectural consultation proposal via email.
         </p>
       </div>
 
@@ -119,23 +120,21 @@ export default function ContactForm() {
             <span>{submitStatus.message}</span>
           </div>
 
-          {submitStatus.success && whatsappActionUrl && (
-            <div className="p-5 rounded-2xl bg-[#0b1410] border border-emerald-500/30 space-y-3">
-              <div className="flex items-center space-x-2 text-emerald-300 text-xs font-mono uppercase tracking-wider">
-                <MessageSquare className="w-4 h-4 text-emerald-400" />
-                <span>{"// Real-Time WhatsApp Dispatch"}</span>
+          {submitStatus.success && mailActionUrl && (
+            <div className="p-5 rounded-2xl bg-[#15171c] border border-amber-300/20 space-y-3">
+              <div className="flex items-center space-x-2 text-amber-300 text-xs font-mono uppercase tracking-wider">
+                <Mail className="w-3.5 h-3.5 text-amber-300" />
+                <span>{"// Studio Email Notification Dispatched"}</span>
               </div>
               <p className="text-xs text-zinc-300 leading-relaxed">
-                For immediate priority booking with our Principal Architect, click below to forward your consultation brief directly to our official studio WhatsApp:
+                Your consultation has been queued for Principal Architect review. If you would also like to keep a direct thread in your personal email client, tap below:
               </p>
               <a
-                href={whatsappActionUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="group inline-flex items-center justify-center space-x-2 w-full py-3.5 px-5 rounded-xl text-xs font-semibold uppercase tracking-wider text-zinc-950 bg-gradient-to-r from-emerald-400 via-teal-300 to-emerald-400 hover:from-emerald-300 hover:to-teal-200 transition-all shadow-lg shadow-emerald-500/20 hover:scale-[1.01] active:scale-[0.99]"
+                href={mailActionUrl}
+                className="group inline-flex items-center justify-center space-x-2 w-full py-3.5 px-5 rounded-xl text-xs font-semibold uppercase tracking-wider text-zinc-950 bg-gradient-to-r from-amber-200 via-amber-300 to-amber-200 hover:from-amber-100 hover:to-amber-200 transition-all shadow-lg shadow-amber-500/15 hover:scale-[1.01] active:scale-[0.99]"
               >
-                <MessageSquare className="w-4 h-4" />
-                <span>Confirm on WhatsApp (+91 78274 73377)</span>
+                <Mail className="w-4 h-4" />
+                <span>Open in Your Email Client (1dreamdesignstudioo@gmail.com)</span>
                 <ArrowUpRight className="w-4 h-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
               </a>
             </div>

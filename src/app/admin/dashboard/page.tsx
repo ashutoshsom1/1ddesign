@@ -104,23 +104,19 @@ export default function AdminDashboard() {
                       <td className="py-3 px-4">{submission.email}</td>
                       <td className="py-3 px-4">{submission.service}</td>
                       <td className="py-3 px-4">
-                        <div className="flex items-center space-x-3">
+                        <div className="flex items-center space-x-2">
                           <button
                             onClick={() => setSelectedSubmission(submission)}
                             className="text-blue-600 hover:text-blue-800 font-medium"
                           >
                             View Details
                           </button>
-                          {submission.phone && (
-                            <a
-                              href={`https://wa.me/${submission.phone.replace(/[^0-9]/g, '')}?text=${encodeURIComponent(`Hello ${submission.name}, thank you for your consultation request with 1 Dream Design Studio regarding ${submission.service}.`)}`}
-                              target="_blank"
-                              rel="noopener noreferrer"
-                              className="text-emerald-600 hover:text-emerald-800 text-xs font-semibold px-2.5 py-1 bg-emerald-50 hover:bg-emerald-100 rounded-md border border-emerald-200 transition-colors"
-                            >
-                              WhatsApp
-                            </a>
-                          )}
+                          <a
+                            href={`mailto:${submission.email}?subject=${encodeURIComponent(`Re: Spatial Consultation Brief - 1 Dream Design Studio`)}`}
+                            className="text-amber-700 hover:text-amber-900 text-xs font-semibold px-2.5 py-1 bg-amber-50 hover:bg-amber-100 rounded-md border border-amber-200 transition-colors"
+                          >
+                            Email Client
+                          </a>
                         </div>
                       </td>
                     </tr>
@@ -184,6 +180,12 @@ export default function AdminDashboard() {
               </div>
               
               <div className="mt-6 flex justify-end space-x-3">
+                <a
+                  href={`mailto:${selectedSubmission.email}?subject=${encodeURIComponent(`Re: Spatial Consultation Brief - 1 Dream Design Studio`)}`}
+                  className="bg-amber-500 text-zinc-950 px-4 py-2 rounded-md hover:bg-amber-400 transition duration-300 text-sm font-semibold flex items-center space-x-1.5"
+                >
+                  <span>Reply via Email</span>
+                </a>
                 {selectedSubmission.phone && (
                   <a
                     href={`https://wa.me/${selectedSubmission.phone.replace(/[^0-9]/g, '')}?text=${encodeURIComponent(`Hello ${selectedSubmission.name}, thank you for reaching out to 1 Dream Design Studio regarding ${selectedSubmission.service}. I would love to discuss your project.`)}`}
@@ -191,7 +193,7 @@ export default function AdminDashboard() {
                     rel="noopener noreferrer"
                     className="bg-emerald-600 text-white px-4 py-2 rounded-md hover:bg-emerald-700 transition duration-300 text-sm font-medium flex items-center space-x-1.5"
                   >
-                    <span>Reply via WhatsApp</span>
+                    <span>WhatsApp</span>
                   </a>
                 )}
                 <button
