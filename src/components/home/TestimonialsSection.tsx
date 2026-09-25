@@ -1,118 +1,136 @@
 "use client";
 
-import React, { useState } from 'react';
-import Image from 'next/image';
-
-const testimonials = [
-  {
-    id: 1,
-    name: 'Shrey',
-    role: 'Homeowner',
-    image: 'https://randomuser.me/api/portraits/men/1.jpg',
-    quote: 'Dream Design Studio transformed our house into a stunning home that perfectly reflects our style and needs. Their attention to detail and creative solutions exceeded our expectations. The team was professional, responsive, and a joy to work with throughout the entire process.',
-  },
-  {
-    id: 2,
-    name: 'Ritanshu',
-    role: 'Business Owner',
-    image: 'https://randomuser.me/api/portraits/men/2.jpg',
-    quote: 'Working with Dream Design Studio on our office renovation was an excellent experience. They understood our brand and created a space that impresses clients while enhancing our team&apos;s productivity. Their ability to balance aesthetics with functionality is truly remarkable.',
-  },
-  {
-    id: 3,
-    name: 'Himanshu',
-    role: 'Restaurant Owner',
-    image: 'https://randomuser.me/api/portraits/men/3.jpg',
-    quote: 'The team at Dream Design Studio designed a restaurant space that has become a talking point among our customers. Their innovative approach and understanding of our concept resulted in a unique dining environment that enhances the overall experience. Highly recommended!',
-  },
-];
+import React, { useState } from "react";
+import { motion, AnimatePresence } from "motion/react";
+import { ChevronLeft, ChevronRight, Star, CheckCircle2 } from "lucide-react";
+import { testimonials, statistics } from "@/data/projectsData";
 
 export default function TestimonialsSection() {
   const [activeIndex, setActiveIndex] = useState(0);
 
   const nextTestimonial = () => {
-    setActiveIndex((prevIndex) => (prevIndex + 1) % testimonials.length);
+    setActiveIndex((prev) => (prev + 1) % testimonials.length);
   };
 
   const prevTestimonial = () => {
-    setActiveIndex((prevIndex) => (prevIndex - 1 + testimonials.length) % testimonials.length);
+    setActiveIndex((prev) => (prev - 1 + testimonials.length) % testimonials.length);
   };
 
   return (
-    <section className="py-20 bg-gray-900 text-white">
-      <div className="container mx-auto px-4">
-        <div className="text-center mb-16">
-          <h2 className="text-3xl md:text-4xl font-bold mb-4">What Our Clients Say</h2>
-          <p className="text-xl text-gray-300 max-w-3xl mx-auto">
-            Don&apos;t just take our word for it. Here&apos;s what our clients have to say about working with Dream Design Studio.
+    <section className="py-24 bg-[#0b0c0e] relative overflow-hidden">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        
+        {/* Architectural Firm Metrics */}
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 p-8 rounded-2xl bg-[#121418] border border-white/[0.08] shadow-2xl mb-24">
+          {statistics.map((stat, idx) => (
+            <div key={idx} className="flex flex-col items-center text-center p-4">
+              <span className="text-3xl sm:text-4xl lg:text-5xl font-light text-amber-300 font-serif tracking-tight">
+                {stat.value}
+              </span>
+              <span className="text-xs uppercase tracking-[0.16em] font-medium text-white mt-2">
+                {stat.label}
+              </span>
+              <span className="text-[11px] font-mono text-zinc-500 mt-1">
+                {stat.detail}
+              </span>
+            </div>
+          ))}
+        </div>
+
+        {/* Section Header */}
+        <div className="text-center max-w-3xl mx-auto mb-16">
+          <span className="text-[11px] font-mono tracking-[0.25em] text-amber-300 uppercase">
+            {"// Client Testimonials"}
+          </span>
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-light text-white tracking-tight mt-2">
+            Endorsements of <span className="font-serif italic text-gold-gradient">Mastery</span>
+          </h2>
+          <p className="text-sm sm:text-base text-zinc-400 mt-4 font-light leading-relaxed">
+            Discover what homeowners and developers say about partnering with 1 Dream Design Studio for turnkey architectural execution.
           </p>
         </div>
 
-        <div className="max-w-4xl mx-auto">
-          <div className="relative bg-gray-800 rounded-xl p-8 md:p-12">
-            <svg className="absolute top-0 left-0 transform -translate-x-6 -translate-y-6 h-16 w-16 text-blue-600 opacity-50" fill="currentColor" viewBox="0 0 32 32" aria-hidden="true">
-              <path d="M9.352 4C4.456 7.456 1 13.12 1 19.36c0 5.088 3.072 8.064 6.624 8.064 3.36 0 5.856-2.688 5.856-5.856 0-3.168-2.208-5.472-5.088-5.472-.576 0-1.344.096-1.536.192.48-3.264 3.552-7.104 6.624-9.024L9.352 4zm16.512 0c-4.8 3.456-8.256 9.12-8.256 15.36 0 5.088 3.072 8.064 6.624 8.064 3.264 0 5.856-2.688 5.856-5.856 0-3.168-2.304-5.472-5.184-5.472-.576 0-1.248.096-1.44.192.48-3.264 3.456-7.104 6.528-9.024L25.864 4z" />
-            </svg>
+        {/* Testimonial Motion Card */}
+        <div className="max-w-4xl mx-auto relative">
+          <div className="relative p-8 sm:p-12 lg:p-16 rounded-3xl bg-[#121418] border border-white/[0.1] shadow-2xl">
+            {/* Ambient subtle glow */}
+            <div className="absolute top-0 right-0 w-64 h-64 bg-amber-400/5 rounded-full blur-3xl pointer-events-none" />
 
-            <div className="relative">
-              <div className="mb-8">
-                <p className="text-xl italic leading-relaxed">&quot;{testimonials[activeIndex].quote}&quot;</p>
-              </div>
-
-              <div className="flex items-center">
-                <div className="relative h-12 w-12 rounded-full overflow-hidden mr-4">
-                  <Image
-                    src={testimonials[activeIndex].image}
-                    alt={testimonials[activeIndex].name}
-                    fill
-                    className="object-cover"
-                  />
-                </div>
-                <div>
-                  <h4 className="font-semibold">{testimonials[activeIndex].name}</h4>
-                  <p className="text-gray-400">{testimonials[activeIndex].role}</p>
-                </div>
-              </div>
+            <div className="flex items-center space-x-1 text-amber-300 mb-6">
+              {[...Array(5)].map((_, i) => (
+                <Star key={i} className="w-4 h-4 fill-amber-300 text-amber-300" />
+              ))}
             </div>
+
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={activeIndex}
+                initial={{ opacity: 0, y: 15 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -15 }}
+                transition={{ duration: 0.3 }}
+              >
+                <blockquote className="text-lg sm:text-2xl font-light text-zinc-200 leading-relaxed font-serif italic mb-8">
+                  &ldquo;{testimonials[activeIndex].quote}&rdquo;
+                </blockquote>
+
+                <div className="flex flex-col sm:flex-row sm:items-center justify-between pt-6 border-t border-white/[0.08] gap-4">
+                  <div>
+                    <h4 className="text-base font-medium text-white">
+                      {testimonials[activeIndex].author}
+                    </h4>
+                    <p className="text-xs font-mono text-amber-300/90 mt-0.5">
+                      {testimonials[activeIndex].project}
+                    </p>
+                    <p className="text-[11px] text-zinc-500 mt-0.5">
+                      {testimonials[activeIndex].location}
+                    </p>
+                  </div>
+
+                  <div className="flex items-center space-x-2 text-[11px] font-mono text-zinc-400 bg-white/[0.03] px-3.5 py-1.5 rounded-full border border-white/[0.06] w-fit">
+                    <CheckCircle2 className="w-3.5 h-3.5 text-emerald-400" />
+                    <span>Verified Turnkey Handover</span>
+                  </div>
+                </div>
+              </motion.div>
+            </AnimatePresence>
           </div>
 
-          <div className="flex justify-center mt-8 space-x-4">
-            <button
-              onClick={prevTestimonial}
-              className="p-2 rounded-full bg-gray-800 hover:bg-gray-700 transition duration-300"
-              aria-label="Previous testimonial"
-            >
-              <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
-              </svg>
-            </button>
-
+          {/* Carousel Navigation Controls */}
+          <div className="flex items-center justify-between mt-8">
             <div className="flex space-x-2">
-              {testimonials.map((_, index) => (
+              {testimonials.map((_, i) => (
                 <button
-                  key={index}
-                  onClick={() => setActiveIndex(index)}
-                  className={`w-3 h-3 rounded-full transition duration-300 ${
-                    index === activeIndex ? 'bg-blue-600' : 'bg-gray-600 hover:bg-gray-500'
+                  key={i}
+                  onClick={() => setActiveIndex(i)}
+                  className={`h-1.5 transition-all duration-300 rounded-full ${
+                    i === activeIndex ? "w-8 bg-amber-300" : "w-2 bg-zinc-700 hover:bg-zinc-500"
                   }`}
-                  aria-label={`Go to testimonial ${index + 1}`}
+                  aria-label={`Go to testimonial ${i + 1}`}
                 />
               ))}
             </div>
 
-            <button
-              onClick={nextTestimonial}
-              className="p-2 rounded-full bg-gray-800 hover:bg-gray-700 transition duration-300"
-              aria-label="Next testimonial"
-            >
-              <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-              </svg>
-            </button>
+            <div className="flex space-x-3">
+              <button
+                onClick={prevTestimonial}
+                className="p-3 rounded-full bg-[#121418] hover:bg-zinc-800 text-zinc-300 hover:text-white border border-white/10 transition-colors"
+                aria-label="Previous testimonial"
+              >
+                <ChevronLeft className="w-5 h-5" />
+              </button>
+              <button
+                onClick={nextTestimonial}
+                className="p-3 rounded-full bg-[#121418] hover:bg-zinc-800 text-zinc-300 hover:text-white border border-white/10 transition-colors"
+                aria-label="Next testimonial"
+              >
+                <ChevronRight className="w-5 h-5" />
+              </button>
+            </div>
           </div>
+
         </div>
       </div>
     </section>
   );
 }
-

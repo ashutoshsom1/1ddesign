@@ -1,136 +1,160 @@
 "use client";
 
-import React from 'react';
-import Image from 'next/image';
-import Link from 'next/link';
+import React from "react";
+import Image from "next/image";
+import Link from "next/link";
+import { motion } from "motion/react";
+import { ArrowUpRight, CheckCircle2 } from "lucide-react";
 
 const services = [
   {
-    id: 1,
-    title: 'Architecture',
-    description: 'Our Architecture services combine innovative design with practical functionality to create spaces that inspire. With a focus on sustainability, aesthetics, and personalized solutions, we deliver architectural designs that stand the test of time while meeting the unique needs of each client.',
-    image: 'https://images.unsplash.com/photo-1487958449943-2429e8be8625?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80',
+    id: "architecture",
+    title: "Bespoke Villa Architecture",
+    category: "Architecture & Structural",
+    description:
+      "We design monolithic and cantilevered residences that maximize natural sunlight, micro-climates, and grand spatial volumes. Every structural element is engineered with timeless distinction.",
+    image: "/images/featured/villa-exterior-hero.jpg",
     features: [
-      'Custom residential and commercial designs',
-      'Sustainable and eco-friendly solutions',
-      'Comprehensive planning and documentation',
-      'Building code compliance',
-      'Project management and supervision',
+      "Cantilevered Balconies & Thermal Ash Louver Integration",
+      "Biophilic Internal Courtyard & Sky Garden Zoning",
+      "Full Structural, MEP & Municipal Sanction Documentation",
+      "Custom Facade Lighting & Perimeter Automation",
     ],
   },
   {
-    id: 2,
-    title: 'Interior Design',
-    description: 'We specialize in creating stunning, functional interiors that reflect your style and vision. From concept to completion, our team blends creativity with precision, offering tailored designs that elevate both residential and commercial spaces. We consider every detail to create harmonious environments that enhance daily living and working experiences.',
-    image: 'https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2000&q=80',
+    id: "interior-design",
+    title: "Haute-Couture Master Suites & Living",
+    category: "Interior Spatial Design",
+    description:
+      "Sculpted for luxury comfort. We hand-select exotic natural stones, bookmatched emerald onyx, brushed champagne brass accents, and bespoke acoustic wainscoting.",
+    image: "/images/featured/master-suite-emerald-01.jpg",
     features: [
-      'Space planning and layout optimization',
-      'Custom furniture and fixture selection',
-      'Color scheme and material coordination',
-      'Lighting design and implementation',
-      'Accessory and artwork curation',
+      "Natural Emerald Verde & Calacatta Stone Bookmatching",
+      "Custom Fluted Acoustic Paneling & Concealed Joinery",
+      "Architectural 3000K Warm LED Cove & Profile Illumination",
+      "Bespoke Italian Leather & Suede Headboard Detailing",
     ],
   },
   {
-    id: 3,
-    title: '3D Visualization',
-    description: 'Our 3D visual services bring your design concepts to life with stunning clarity and precision. From realistic architectural renderings to immersive 3D walkthroughs, we help you visualize spaces before they\'re built, ensuring every detail aligns with your vision and expectations. This powerful tool aids in decision-making and refinement throughout the design process.',
-    image: 'https://images.unsplash.com/photo-1545065053-73dbb3eec985?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80',
+    id: "3d-visualization",
+    title: "Photorealistic 3D Spatial Simulation",
+    category: "Visualization & Virtual Reality",
+    description:
+      "Eliminating ambiguity with hyper-realistic 4K render simulations. We replicate exact physical daylight temperatures, shadow casting, and real material reflectance.",
+    image: "/images/featured/master-suite-emerald-02.jpg",
     features: [
-      'Photorealistic 3D renderings',
-      'Virtual reality experiences',
-      'Interactive 3D walkthroughs',
-      'Conceptual visualization',
-      'Marketing and presentation materials',
+      "Ultra-HD 4K Still Perspectives & Material Previews",
+      "Interactive 360° Panoramic Spatial Walkthroughs",
+      "Day-to-Night Ambient Luminaire Transition Studies",
+      "Exact 1:1 Color & Texture Fidelity Calibration",
     ],
   },
   {
-    id: 4,
-    title: 'Renovation',
-    description: 'Transform your existing space with our comprehensive renovation services. We breathe new life into outdated areas, optimizing functionality while enhancing aesthetic appeal. Our team handles everything from minor updates to complete overhauls, ensuring minimal disruption and maximum satisfaction throughout the renovation process.',
-    image: 'https://images.unsplash.com/photo-1581235720704-06d3acfcb36f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2080&q=80',
+    id: "creative-spaces",
+    title: "Thematic & Children Creative Suites",
+    category: "Bespoke Residential Living",
+    description:
+      "Transforming children's and hobby zones into imaginative havens. Featuring illuminated celestial moon portals, hidden storage walls, and ergonomic homework pods.",
+    image: "/images/featured/kids-bedroom-creative.jpg",
     features: [
-      'Kitchen and bathroom remodeling',
-      'Structural modifications',
-      'Flooring and wall treatments',
-      'Electrical and plumbing updates',
-      'Historical restoration',
+      "Circular Halo Night Light Niches & Starry Ceilings",
+      "Modular Study Alcoves with Concealed Wire Troughs",
+      "Durable Polyurethane Finishes & Acoustic Wallcoverings",
+      "Growth-Adaptive Ergonomic Furniture Systems",
     ],
   },
   {
-    id: 5,
-    title: 'Landscape Design',
-    description: 'Create stunning outdoor spaces that complement your architecture with our landscape design services. We blend natural elements with thoughtful planning to create beautiful environments that extend your living space outdoors. Our sustainable approaches ensure your landscape thrives while minimizing environmental impact.',
-    image: 'https://images.unsplash.com/photo-1558036117-15d82a90b9b1?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80',
+    id: "turnkey-execution",
+    title: "Turnkey White-Glove Handover",
+    category: "Contracting & Site Realization",
+    description:
+      "Our firm assumes complete single-source responsibility. From civil demolition to final white-glove styling, our dedicated site engineers ensure spotless 1:1 delivery.",
+    image: "/images/projects/project-14.jpg",
     features: [
-      'Garden and planting design',
-      'Outdoor living spaces',
-      'Water features and irrigation',
-      'Lighting and hardscape elements',
-      'Sustainable landscaping solutions',
-    ],
-  },
-  {
-    id: 6,
-    title: 'Design Consultancy',
-    description: 'Our expert design consultancy services provide personalized solutions that bring your vision to life. From concept to execution, we blend creativity with technical precision, ensuring every space is functional, aesthetically pleasing, and tailored to your unique needs. Our consultants offer guidance on all aspects of design, helping you make informed decisions.',
-    image: 'https://images.unsplash.com/photo-1664575599736-c5197c684128?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80',
-    features: [
-      'Design strategy and planning',
-      'Material and finish selection',
-      'Vendor and contractor recommendations',
-      'Budget optimization',
-      'Project coordination',
+      "Dedicated On-Site Architectural Project Director",
+      "Zero-Variance Material Authentication Standards",
+      "Milestone-Guaranteed Scheduling & Weekly Progress Reports",
+      "Snag-Free White-Glove Key Handover",
     ],
   },
 ];
 
 export default function ServicesList() {
   return (
-    <div className="space-y-24">
-      {services.map((service, index) => (
-        <div
-          key={service.id}
-          className={`grid grid-cols-1 lg:grid-cols-2 gap-12 items-center ${
-            index % 2 === 1 ? 'lg:flex-row-reverse' : ''
-          }`}
-        >
-          {/* Image Side */}
-          <div className="relative h-[400px] rounded-lg overflow-hidden">
-            <Image
-              src={service.image}
-              alt={service.title}
-              fill
-              className="object-cover"
-            />
-          </div>
-
-          {/* Content Side */}
-          <div>
-            <h2 className="text-3xl font-bold mb-4">{service.title}</h2>
-            <p className="text-gray-600 mb-6">{service.description}</p>
-
-            <h3 className="text-xl font-semibold mb-3">What We Offer:</h3>
-            <ul className="space-y-2 mb-6">
-              {service.features.map((feature, i) => (
-                <li key={i} className="flex items-start">
-                  <svg className="w-5 h-5 text-blue-600 mr-2 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                  </svg>
-                  <span>{feature}</span>
-                </li>
-              ))}
-            </ul>
-
-            <Link
-              href="/contact"
-              className="bg-blue-600 hover:bg-blue-700 text-white font-medium py-3 px-6 rounded-md transition duration-300 inline-block"
+    <div className="space-y-28">
+      {services.map((service, index) => {
+        const isReversed = index % 2 === 1;
+        return (
+          <motion.div
+            key={service.id}
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-80px" }}
+            transition={{ duration: 0.6 }}
+            className={`grid grid-cols-1 lg:grid-cols-12 gap-12 items-center ${
+              isReversed ? "lg:grid-flow-dense" : ""
+            }`}
+          >
+            {/* Visual Column */}
+            <div
+              className={`lg:col-span-6 relative ${
+                isReversed ? "lg:col-start-7" : ""
+              }`}
             >
-              Get a Quote
-            </Link>
-          </div>
-        </div>
-      ))}
+              <div className="relative aspect-[4/3] rounded-3xl overflow-hidden border border-white/[0.1] shadow-2xl bg-zinc-900 group">
+                <Image
+                  src={service.image}
+                  alt={service.title}
+                  fill
+                  sizes="(max-width: 1024px) 100vw, 50vw"
+                  className="object-cover object-center transition-transform duration-700 group-hover:scale-105"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent" />
+                <div className="absolute top-4 left-4 px-3.5 py-1.5 rounded-full bg-black/60 backdrop-blur-md border border-white/10 text-[10px] font-mono tracking-widest text-amber-300 uppercase">
+                  {service.category}
+                </div>
+              </div>
+            </div>
+
+            {/* Narrative Column */}
+            <div
+              className={`lg:col-span-6 flex flex-col justify-center ${
+                isReversed ? "lg:col-start-1" : ""
+              }`}
+            >
+              <span className="text-[11px] font-mono tracking-[0.25em] text-amber-300 uppercase">
+                {`// Service 0${index + 1}`}
+              </span>
+              <h2 className="text-3xl sm:text-4xl font-light text-white tracking-tight mt-1 mb-4">
+                {service.title}
+              </h2>
+              <p className="text-sm sm:text-base text-zinc-400 font-light leading-relaxed mb-6">
+                {service.description}
+              </p>
+
+              {/* Architectural deliverables */}
+              <div className="space-y-2.5 mb-8">
+                {service.features.map((feature, fIdx) => (
+                  <div key={fIdx} className="flex items-start space-x-3 text-xs sm:text-sm text-zinc-300">
+                    <CheckCircle2 className="w-4 h-4 text-amber-300 shrink-0 mt-0.5" />
+                    <span>{feature}</span>
+                  </div>
+                ))}
+              </div>
+
+              <div>
+                <Link
+                  href="/contact"
+                  className="group inline-flex items-center space-x-2 text-xs uppercase tracking-[0.18em] font-semibold text-zinc-950 bg-amber-300 hover:bg-amber-200 px-6 py-3 rounded-full transition-all duration-300 shadow-lg shadow-amber-300/10"
+                >
+                  <span>Commission This Scope</span>
+                  <ArrowUpRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+                </Link>
+              </div>
+            </div>
+          </motion.div>
+        );
+      })}
     </div>
   );
 }

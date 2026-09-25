@@ -1,72 +1,73 @@
-import React from 'react';
+import React from "react";
+import { Sparkles, ShieldCheck, Layers, Award } from "lucide-react";
 
 const values = [
   {
-    id: 1,
-    title: 'Innovation',
-    description: 'We constantly push the boundaries of design, embracing new technologies and approaches to create forward-thinking solutions.',
-    icon: (
-      <svg className="w-12 h-12 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
-      </svg>
-    ),
+    id: "fidelity",
+    title: "1:1 Render Fidelity",
+    description:
+      "We bridge digital visualization with physical execution. What is approved in our 4K photorealistic 3D model is built with millimeter precision.",
+    icon: Sparkles,
   },
   {
-    id: 2,
-    title: 'Sustainability',
-    description: 'We are committed to environmentally responsible design practices that minimize ecological impact while maximizing efficiency and comfort.',
-    icon: (
-      <svg className="w-12 h-12 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-      </svg>
-    ),
+    id: "materiality",
+    title: "Honest Materiality",
+    description:
+      "From authentic bookmatched emerald marble to thermal ash louvers, we prioritize genuine textures that age with grace and distinction.",
+    icon: Layers,
   },
   {
-    id: 3,
-    title: 'Collaboration',
-    description: 'We believe in the power of teamwork, working closely with clients, contractors, and stakeholders to achieve exceptional results.',
-    icon: (
-      <svg className="w-12 h-12 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
-      </svg>
-    ),
+    id: "integrity",
+    title: "Turnkey Accountability",
+    description:
+      "Single-source responsibility from concept to white-glove handover. No contractor finger-pointing, no unexpected budget surprises.",
+    icon: ShieldCheck,
   },
   {
-    id: 4,
-    title: 'Excellence',
-    description: 'We are dedicated to delivering the highest quality in every aspect of our work, from initial concepts to final execution.',
-    icon: (
-      <svg className="w-12 h-12 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z" />
-      </svg>
-    ),
+    id: "mastery",
+    title: "Architectural Excellence",
+    description:
+      "Every joint, shadow gap, cove light angle, and bespoke cabinet is scrutinized to deliver spaces worthy of architectural recognition.",
+    icon: Award,
   },
 ];
 
 export default function ValuesSection() {
   return (
-    <section className="py-20 bg-gray-50">
-      <div className="container mx-auto px-4">
-        <div className="text-center mb-16">
-          <h2 className="text-3xl md:text-4xl font-bold mb-4">Our Core Values</h2>
-          <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-            These principles guide our approach to every project and interaction.
+    <section className="py-24 bg-[#0b0c0e]">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="text-center max-w-3xl mx-auto mb-16">
+          <span className="text-[11px] font-mono tracking-[0.25em] text-amber-300 uppercase">
+            {"// Studio Tenets"}
+          </span>
+          <h2 className="text-3xl sm:text-4xl font-light text-white tracking-tight mt-2">
+            The Principles That <span className="font-serif italic text-gold-gradient">Govern Our Craft</span>
+          </h2>
+          <p className="text-sm text-zinc-400 mt-4 font-light">
+            Guiding our studio from the first pencil trace to the final ceremonial key delivery.
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-          {values.map((value) => (
-            <div 
-              key={value.id} 
-              className="bg-white p-8 rounded-lg shadow-md hover:shadow-lg transition duration-300 text-center"
-            >
-              <div className="flex justify-center mb-4">
-                {value.icon}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+          {values.map((val) => {
+            const Icon = val.icon;
+            return (
+              <div
+                key={val.id}
+                className="p-8 rounded-2xl bg-[#121418] border border-white/[0.08] hover:border-amber-300/30 transition-all duration-300 flex flex-col justify-between"
+              >
+                <div>
+                  <div className="p-3 rounded-xl bg-white/[0.04] border border-white/[0.08] text-amber-300 w-fit mb-6">
+                    <Icon className="w-5 h-5" />
+                  </div>
+                  <h3 className="text-lg font-medium text-white mb-2">{val.title}</h3>
+                  <p className="text-xs text-zinc-400 font-light leading-relaxed">
+                    {val.description}
+                  </p>
+                </div>
               </div>
-              <h3 className="text-xl font-bold mb-3">{value.title}</h3>
-              <p className="text-gray-600">{value.description}</p>
-            </div>
-          ))}
+            );
+          })}
         </div>
       </div>
     </section>

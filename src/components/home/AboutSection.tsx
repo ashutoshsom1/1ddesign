@@ -1,92 +1,134 @@
-import React from 'react';
-import Link from 'next/link';
-import Image from 'next/image';
+"use client";
+
+import React from "react";
+import Link from "next/link";
+import Image from "next/image";
+import { motion } from "motion/react";
+import { ArrowUpRight, Compass, ShieldCheck, Sparkles, Clock } from "lucide-react";
 
 export default function AboutSection() {
   return (
-    <section className="py-20">
-      <div className="container mx-auto px-4">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-          {/* Image Side */}
-          <div className="relative">
-            <div className="relative h-[500px] rounded-lg overflow-hidden">
-              <Image 
-                src="https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2000&q=80" 
-                alt="Interior Design" 
+    <section className="py-24 bg-[#0e1014] relative overflow-hidden">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
+          
+          {/* Visual Column: Dual Architectural Image Layering */}
+          <div className="lg:col-span-6 relative">
+            <div className="relative aspect-[4/5] rounded-2xl overflow-hidden border border-white/[0.1] shadow-2xl">
+              <Image
+                src="/images/featured/master-suite-emerald-01.jpg"
+                alt="1 Dream Design Master Craftsmanship"
                 fill
+                sizes="(max-width: 1024px) 100vw, 50vw"
+                className="object-cover object-center"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent" />
+            </div>
+
+            {/* Overlapping Secondary Image */}
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.7, delay: 0.2 }}
+              className="absolute -bottom-8 -right-6 sm:-right-8 w-3/5 aspect-[4/3] rounded-xl overflow-hidden border-2 border-[#121418] shadow-2xl hidden sm:block"
+            >
+              <Image
+                src="/images/featured/kids-bedroom-creative.jpg"
+                alt="1 Dream Design Creative Living Suite"
+                fill
+                sizes="350px"
                 className="object-cover"
               />
-            </div>
-            <div className="absolute -bottom-6 -right-6 bg-blue-600 text-white p-6 rounded-lg shadow-xl">
-              <div className="text-4xl font-bold mb-1">15+</div>
-              <div className="text-sm uppercase tracking-wider">Years Experience</div>
+              <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
+              <div className="absolute bottom-3 left-3 right-3 text-[10px] font-mono text-zinc-300 uppercase tracking-widest flex items-center justify-between">
+                <span>CREATIVE LIVING SUITE</span>
+                <span className="text-amber-300">1:1 MATCH</span>
+              </div>
+            </motion.div>
+
+            {/* Floating Experience Badge */}
+            <div className="absolute -top-4 -left-4 sm:top-6 sm:-left-6 p-4 rounded-xl bg-[#121418]/90 backdrop-blur-xl border border-white/[0.12] shadow-2xl">
+              <p className="text-3xl font-light text-amber-300 tracking-tight font-serif">25+</p>
+              <p className="text-[10px] font-mono tracking-widest uppercase text-zinc-400 mt-0.5">
+                Bespoke Residencies Built
+              </p>
             </div>
           </div>
 
-          {/* Content Side */}
-          <div>
-            <h2 className="text-3xl md:text-4xl font-bold mb-6">Dream Design Studio</h2>
-            <p className="text-xl text-gray-600 mb-6">
-              Dream Design Studio is a premier architecture and interior design firm dedicated to creating exceptional spaces that inspire and delight.
-            </p>
-            <p className="text-gray-600 mb-8">
-              With our team of talented designers and architects, we bring creativity, innovation, and technical expertise to every project, ensuring results that exceed expectations. We believe that great design should be both beautiful and functional, enhancing the way people live, work, and interact with their environment.
+          {/* Narrative Column */}
+          <div className="lg:col-span-6 flex flex-col justify-center">
+            <span className="text-[11px] font-mono tracking-[0.25em] text-amber-300 uppercase">
+              {"// Studio Philosophy"}
+            </span>
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-light text-white tracking-tight mt-2 leading-[1.15]">
+              Architecture Conceived with Soul, <span className="font-serif italic text-gold-gradient">Built with Exactitude</span>
+            </h2>
+
+            <p className="text-sm sm:text-base text-zinc-400 mt-6 font-light leading-relaxed">
+              At <strong className="text-zinc-200 font-medium">1 Dream Design Studio</strong>, we reject standard templates. We believe an exceptional home or commercial environment is an intimate portrait of those who inhabit it.
             </p>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
-              <div className="flex items-start">
-                <div className="bg-blue-100 p-3 rounded-md mr-4">
-                  <svg className="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
-                  </svg>
+            <p className="text-sm sm:text-base text-zinc-400 mt-4 font-light leading-relaxed">
+              Our studio combines structural architectural engineering with haute-couture interior craftsmanship. By pairing 4K photorealistic spatial simulations with seasoned site artisans, we eradicate the gap between what you see in design and what you touch in reality.
+            </p>
+
+            {/* Core Differentiator Pillars */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-8 pt-8 border-t border-white/[0.08]">
+              <div className="flex items-start space-x-3.5">
+                <div className="p-2 rounded-lg bg-white/[0.04] border border-white/[0.08] text-amber-300 shrink-0">
+                  <ShieldCheck className="w-4 h-4" />
                 </div>
                 <div>
-                  <h3 className="text-lg font-semibold mb-2">Quality Assurance</h3>
-                  <p className="text-gray-600">We maintain the highest standards in every aspect of our work.</p>
+                  <h4 className="text-sm font-medium text-white">1:1 Render Fidelity</h4>
+                  <p className="text-xs text-zinc-400 mt-1">Exact materials, lighting angles, and dimensions physically replicated.</p>
                 </div>
               </div>
-              <div className="flex items-start">
-                <div className="bg-blue-100 p-3 rounded-md mr-4">
-                  <svg className="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
-                  </svg>
+
+              <div className="flex items-start space-x-3.5">
+                <div className="p-2 rounded-lg bg-white/[0.04] border border-white/[0.08] text-amber-300 shrink-0">
+                  <Compass className="w-4 h-4" />
                 </div>
                 <div>
-                  <h3 className="text-lg font-semibold mb-2">Innovative Solutions</h3>
-                  <p className="text-gray-600">We embrace creativity and forward-thinking approaches.</p>
+                  <h4 className="text-sm font-medium text-white">Bespoke Millwork</h4>
+                  <p className="text-xs text-zinc-400 mt-1">Tailored fluted paneling, emerald marble veining, and concealed profiles.</p>
                 </div>
               </div>
-              <div className="flex items-start">
-                <div className="bg-blue-100 p-3 rounded-md mr-4">
-                  <svg className="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
-                  </svg>
+
+              <div className="flex items-start space-x-3.5">
+                <div className="p-2 rounded-lg bg-white/[0.04] border border-white/[0.08] text-amber-300 shrink-0">
+                  <Clock className="w-4 h-4" />
                 </div>
                 <div>
-                  <h3 className="text-lg font-semibold mb-2">Client-Centered</h3>
-                  <p className="text-gray-600">Your vision and satisfaction are our top priorities.</p>
+                  <h4 className="text-sm font-medium text-white">Zero-Delay Turnkey</h4>
+                  <p className="text-xs text-zinc-400 mt-1">Strict timeline milestones with white-glove snag-free handover.</p>
                 </div>
               </div>
-              <div className="flex items-start">
-                <div className="bg-blue-100 p-3 rounded-md mr-4">
-                  <svg className="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
-                  </svg>
+
+              <div className="flex items-start space-x-3.5">
+                <div className="p-2 rounded-lg bg-white/[0.04] border border-white/[0.08] text-amber-300 shrink-0">
+                  <Sparkles className="w-4 h-4" />
                 </div>
                 <div>
-                  <h3 className="text-lg font-semibold mb-2">Timely Delivery</h3>
-                  <p className="text-gray-600">We respect deadlines and deliver projects on schedule.</p>
+                  <h4 className="text-sm font-medium text-white">Direct Principal Care</h4>
+                  <p className="text-xs text-zinc-400 mt-1">Personal architectural supervision from concept kickoff to key delivery.</p>
                 </div>
               </div>
             </div>
 
-            <Link 
-              href="/about" 
-              className="bg-blue-600 hover:bg-blue-700 text-white font-medium py-3 px-8 rounded-md transition duration-300 inline-block"
-            >
-              Learn More About Us
-            </Link>
+            {/* Action CTA */}
+            <div className="mt-10 flex items-center space-x-6">
+              <Link
+                href="/about"
+                className="group inline-flex items-center space-x-2 text-xs uppercase tracking-[0.18em] font-semibold text-zinc-950 bg-amber-300 hover:bg-amber-200 px-6 py-3 rounded-full transition-all duration-300 shadow-lg shadow-amber-300/10"
+              >
+                <span>Read Full Studio Story</span>
+                <ArrowUpRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+              </Link>
+            </div>
+
           </div>
+
         </div>
       </div>
     </section>

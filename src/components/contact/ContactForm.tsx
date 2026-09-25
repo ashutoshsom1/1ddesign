@@ -1,24 +1,30 @@
 "use client";
 
-import React, { useState } from 'react';
+import React, { useState } from "react";
+import { Send, CheckCircle2, AlertCircle } from "lucide-react";
 
 export default function ContactForm() {
   const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    phone: '',
-    service: '',
-    message: ''
+    name: "",
+    email: "",
+    phone: "",
+    service: "",
+    message: "",
   });
 
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [submitStatus, setSubmitStatus] = useState<{ success?: boolean; message?: string } | null>(null);
+  const [submitStatus, setSubmitStatus] = useState<{
+    success?: boolean;
+    message?: string;
+  } | null>(null);
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
+  ) => {
     const { name, value } = e.target;
-    setFormData(prev => ({
+    setFormData((prev) => ({
       ...prev,
-      [name]: value
+      [name]: value,
     }));
   };
 
@@ -28,39 +34,38 @@ export default function ContactForm() {
     setSubmitStatus(null);
 
     try {
-      const response = await fetch('/api/contact', {
-        method: 'POST',
+      const response = await fetch("/api/contact", {
+        method: "POST",
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
         body: JSON.stringify({
           ...formData,
-          date: new Date().toISOString()
+          date: new Date().toISOString(),
         }),
       });
 
       if (response.ok) {
         setSubmitStatus({
           success: true,
-          message: 'Thank you for your message! We will get back to you soon.'
+          message: "Thank you for reaching out. A Principal Architect will contact you within 24 hours.",
         });
-        // Reset form
         setFormData({
-          name: '',
-          email: '',
-          phone: '',
-          service: '',
-          message: ''
+          name: "",
+          email: "",
+          phone: "",
+          service: "",
+          message: "",
         });
       } else {
         const error = await response.text();
-        throw new Error(error || 'Failed to submit form');
+        throw new Error(error || "Failed to submit form");
       }
     } catch (error) {
-      console.error('Error submitting form:', error);
+      console.error("Error submitting form:", error);
       setSubmitStatus({
         success: false,
-        message: 'There was an error submitting your message. Please try again.'
+        message: "There was an error submitting your message. Please reach out to us directly via WhatsApp (+91 78274 73377).",
       });
     } finally {
       setIsSubmitting(false);
@@ -68,16 +73,42 @@ export default function ContactForm() {
   };
 
   return (
-    <form className="bg-white p-8 rounded-lg shadow-md" onSubmit={handleSubmit}>
+    <form
+      onSubmit={handleSubmit}
+      className="p-8 sm:p-10 rounded-3xl bg-[#121418] border border-white/[0.1] shadow-2xl space-y-6"
+    >
+      <div className="border-b border-white/[0.08] pb-6">
+        <span className="text-[10px] font-mono tracking-[0.25em] text-amber-300 uppercase">
+          {"// Architectural Commission"}
+        </span>
+        <h3 className="text-2xl font-light text-white tracking-tight mt-1">
+          Initiate Spatial Consultation
+        </h3>
+        <p className="text-xs text-zinc-400 mt-1">
+          Fill out the brief below or contact our atelier directly via WhatsApp.
+        </p>
+      </div>
+
       {submitStatus && (
-        <div className={`mb-6 p-4 rounded-md ${submitStatus.success ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800'}`}>
-          {submitStatus.message}
+        <div
+          className={`p-4 rounded-xl text-xs flex items-start space-x-3 ${
+            submitStatus.success
+              ? "bg-emerald-500/10 border border-emerald-500/30 text-emerald-300"
+              : "bg-red-500/10 border border-red-500/30 text-red-300"
+          }`}
+        >
+          {submitStatus.success ? (
+            <CheckCircle2 className="w-4 h-4 shrink-0 mt-0.5 text-emerald-400" />
+          ) : (
+            <AlertCircle className="w-4 h-4 shrink-0 mt-0.5 text-red-400" />
+          )}
+          <span>{submitStatus.message}</span>
         </div>
       )}
 
-      <div className="mb-6">
-        <label htmlFor="name" className="block text-gray-700 font-medium mb-2">
-          Full Name
+      <div>
+        <label htmlFor="name" className="block text-xs font-mono uppercase tracking-wider text-zinc-400 mb-2">
+          Your Name / Representative
         </label>
         <input
           type="text"
@@ -85,88 +116,105 @@ export default function ContactForm() {
           name="name"
           value={formData.name}
           onChange={handleChange}
-          className="w-full px-4 py-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-          placeholder="Your name"
           required
+          placeholder="e.g. Vikram Singhania"
+          className="w-full px-4 py-3 rounded-xl bg-white/[0.03] border border-white/[0.08] text-white text-sm placeholder:text-zinc-600 focus:outline-none focus:border-amber-300 transition-colors"
         />
       </div>
 
-      <div className="mb-6">
-        <label htmlFor="email" className="block text-gray-700 font-medium mb-2">
-          Email Address
-        </label>
-        <input
-          type="email"
-          id="email"
-          name="email"
-          value={formData.email}
-          onChange={handleChange}
-          className="w-full px-4 py-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-          placeholder="your.email@example.com"
-          required
-        />
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+        <div>
+          <label htmlFor="email" className="block text-xs font-mono uppercase tracking-wider text-zinc-400 mb-2">
+            Email Address
+          </label>
+          <input
+            type="email"
+            id="email"
+            name="email"
+            value={formData.email}
+            onChange={handleChange}
+            required
+            placeholder="vikram@example.com"
+            className="w-full px-4 py-3 rounded-xl bg-white/[0.03] border border-white/[0.08] text-white text-sm placeholder:text-zinc-600 focus:outline-none focus:border-amber-300 transition-colors"
+          />
+        </div>
+
+        <div>
+          <label htmlFor="phone" className="block text-xs font-mono uppercase tracking-wider text-zinc-400 mb-2">
+            Phone / WhatsApp
+          </label>
+          <input
+            type="tel"
+            id="phone"
+            name="phone"
+            value={formData.phone}
+            onChange={handleChange}
+            placeholder="+91 98765 43210"
+            className="w-full px-4 py-3 rounded-xl bg-white/[0.03] border border-white/[0.08] text-white text-sm placeholder:text-zinc-600 focus:outline-none focus:border-amber-300 transition-colors"
+          />
+        </div>
       </div>
 
-      <div className="mb-6">
-        <label htmlFor="phone" className="block text-gray-700 font-medium mb-2">
-          Phone Number
-        </label>
-        <input
-          type="tel"
-          id="phone"
-          name="phone"
-          value={formData.phone}
-          onChange={handleChange}
-          className="w-full px-4 py-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-          placeholder="Your phone number"
-        />
-      </div>
-
-      <div className="mb-6">
-        <label htmlFor="service" className="block text-gray-700 font-medium mb-2">
-          Service Interested In
+      <div>
+        <label htmlFor="service" className="block text-xs font-mono uppercase tracking-wider text-zinc-400 mb-2">
+          Project Scope / Typology
         </label>
         <select
           id="service"
           name="service"
           value={formData.service}
           onChange={handleChange}
-          className="w-full px-4 py-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
           required
+          className="w-full px-4 py-3 rounded-xl bg-[#16181d] border border-white/[0.08] text-white text-sm focus:outline-none focus:border-amber-300 transition-colors"
         >
-          <option value="">Select a service</option>
-          <option value="architecture">Architecture</option>
-          <option value="interior-design">Interior Design</option>
-          <option value="3d-visualization">3D Visualization</option>
-          <option value="renovation">Renovation</option>
-          <option value="landscape-design">Landscape Design</option>
-          <option value="other">Other</option>
+          <option value="">Select Spatial Scope</option>
+          <option value="luxury-villa-architecture">Bespoke Architectural Villa (Ground-Up)</option>
+          <option value="master-suite-interior">Haute-Couture Master Suite & Living</option>
+          <option value="complete-turnkey-residence">Complete Turnkey Luxury Residence</option>
+          <option value="3d-rendering-simulation">4K Photorealistic 3D Renders & VR</option>
+          <option value="commercial-office-retail">Commercial Studio / Retail Space</option>
+          <option value="landscape-penthouse">Terrace Pavilion & Landscape</option>
         </select>
       </div>
 
-      <div className="mb-6">
-        <label htmlFor="message" className="block text-gray-700 font-medium mb-2">
-          Your Message
+      <div>
+        <label htmlFor="message" className="block text-xs font-mono uppercase tracking-wider text-zinc-400 mb-2">
+          Spatial Brief & Details
         </label>
         <textarea
           id="message"
           name="message"
           value={formData.message}
           onChange={handleChange}
-          rows={5}
-          className="w-full px-4 py-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-          placeholder="Tell us about your project..."
+          rows={4}
           required
-        ></textarea>
+          placeholder="Describe your site location, approximate square footage, timeline, and aesthetic preferences..."
+          className="w-full px-4 py-3 rounded-xl bg-white/[0.03] border border-white/[0.08] text-white text-sm placeholder:text-zinc-600 focus:outline-none focus:border-amber-300 transition-colors resize-none"
+        />
       </div>
 
       <button
         type="submit"
         disabled={isSubmitting}
-        className={`w-full bg-blue-600 text-white py-3 px-6 rounded-md hover:bg-blue-700 transition duration-300 font-medium ${isSubmitting ? 'opacity-70 cursor-not-allowed' : ''}`}
+        className="w-full py-4 rounded-xl text-xs font-semibold uppercase tracking-[0.2em] text-zinc-950 bg-gradient-to-r from-amber-200 via-amber-300 to-amber-200 hover:scale-[1.01] active:scale-[0.99] transition-all duration-300 shadow-xl shadow-amber-400/15 disabled:opacity-60 disabled:cursor-not-allowed flex items-center justify-center space-x-2"
       >
-        {isSubmitting ? 'Sending...' : 'Send Message'}
+        <Send className="w-3.5 h-3.5" />
+        <span>{isSubmitting ? "Transmitting Proposal..." : "Submit Architectural Brief"}</span>
       </button>
+
+      <div className="pt-4 text-center">
+        <span className="text-[11px] text-zinc-500 font-mono">
+          Prefer instant discussion?{" "}
+          <a
+            href="https://wa.me/917827473377"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-amber-300 hover:underline"
+          >
+            Chat directly on WhatsApp (+91 78274 73377)
+          </a>
+        </span>
+      </div>
     </form>
   );
 }

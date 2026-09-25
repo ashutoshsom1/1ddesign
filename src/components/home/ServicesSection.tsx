@@ -1,104 +1,174 @@
-import React from 'react';
-import Link from 'next/link';
+"use client";
+
+import React from "react";
+import Link from "next/link";
+import Image from "next/image";
+import { motion } from "motion/react";
+import { Building2, Sparkles, Box, Hammer, ArrowUpRight, Compass, Shield } from "lucide-react";
 
 const services = [
   {
-    id: 1,
-    title: 'Architecture',
-    description: 'Our Architecture services combine innovative design with practical functionality to create spaces that inspire. With a focus on sustainability, aesthetics, and personalized solutions.',
-    icon: (
-      <svg className="w-12 h-12 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
-      </svg>
-    ),
+    id: "architecture",
+    title: "Bespoke Villa Architecture",
+    subtitle: "Turnkey Residential & Structural Design",
+    description:
+      "Sculptural facades, cantilevered profiles, bioclimatic orientation, and master structural engineering for luxury private residences.",
+    icon: Building2,
+    image: "/images/featured/villa-exterior-hero.jpg",
+    features: ["Bioclimatic Facades", "Structural Engineering", "Thermal Timber Louvers"],
   },
   {
-    id: 2,
-    title: 'Interior Design',
-    description: 'We specialize in creating stunning, functional interiors that reflect your style and vision. From concept to completion, our team blends creativity with precision.',
-    icon: (
-      <svg className="w-12 h-12 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01" />
-      </svg>
-    ),
+    id: "interior-master",
+    title: "Luxury Interior Spatial Design",
+    subtitle: "Emerald Marble & Fine Millwork",
+    description:
+      "Curating bespoke master suites, dramatic living zones, and custom-crafted kitchens with bookmatched marble and concealed profile illumination.",
+    icon: Sparkles,
+    image: "/images/featured/master-suite-emerald-01.jpg",
+    features: ["Bookmatched Marbles", "Acoustic Fluting", "Shadow-Gap Detailing"],
   },
   {
-    id: 3,
-    title: 'Design Consultancy',
-    description: 'Our expert design consultancy services provide personalized solutions that bring your vision to life. From concept to execution, we blend creativity with technical precision.',
-    icon: (
-      <svg className="w-12 h-12 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
-      </svg>
-    ),
+    id: "3d-visualization",
+    title: "Photorealistic 3D Visualization",
+    subtitle: "Ultra-HD Virtual Simulations",
+    description:
+      "State-of-the-art GPU rendering simulating exact sunlight angles, material reflectance, and spatial ambiance with 1:1 physical match.",
+    icon: Box,
+    image: "/images/featured/master-suite-emerald-02.jpg",
+    features: ["4K Resolution Renders", "Day & Night Ambiance", "Virtual Reality Walkthroughs"],
   },
   {
-    id: 4,
-    title: '3D Visualization',
-    description: 'Our 3D visual services bring your design concepts to life with stunning clarity and precision. From realistic architectural renderings to immersive 3D walkthroughs.',
-    icon: (
-      <svg className="w-12 h-12 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
-      </svg>
-    ),
+    id: "creative-spaces",
+    title: "Creative Living & Children Suites",
+    subtitle: "Bespoke Thematic Spatial Concepts",
+    description:
+      "Playful yet sophisticated environments integrating ambient illuminated moon portals, ergonomic homework pods, and seamless storage.",
+    icon: Compass,
+    image: "/images/featured/kids-bedroom-creative.jpg",
+    features: ["Halo Night Illumination", "Acoustic Wall Paneling", "Ergonomic Study Pods"],
   },
   {
-    id: 5,
-    title: 'Renovation',
-    description: 'Transform your existing space with our comprehensive renovation services. We breathe new life into outdated areas, optimizing functionality while enhancing aesthetic appeal.',
-    icon: (
-      <svg className="w-12 h-12 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" />
-        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
-      </svg>
-    ),
+    id: "turnkey-execution",
+    title: "Turnkey White-Glove Execution",
+    subtitle: "End-to-End Site Realization",
+    description:
+      "Single-point accountability from foundation to styling. We manage all procurement, master artisans, and quality audits with zero compromise.",
+    icon: Hammer,
+    image: "/images/projects/project-14.jpg",
+    features: ["Dedicated Site Director", "Material Authentication", "100% On-Time Handover"],
   },
   {
-    id: 6,
-    title: 'Landscape Design',
-    description: 'Create stunning outdoor spaces that complement your architecture with our landscape design services. We blend natural elements with thoughtful planning to create beautiful environments.',
-    icon: (
-      <svg className="w-12 h-12 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z" />
-      </svg>
-    ),
+    id: "landscape-wellness",
+    title: "Terrace Architecture & Landscape",
+    subtitle: "Biophilic Outdoor Pavilions",
+    description:
+      "Harmonizing architecture with nature. Operable pergolas, outdoor dining bars, sunken fire lounges, and architectural landscape lighting.",
+    icon: Shield,
+    image: "/images/projects/project-20.jpg",
+    features: ["All-Weather Pergolas", "Architectural Water Features", "Sunken Lounges"],
   },
 ];
 
 export default function ServicesSection() {
   return (
-    <section className="py-20 bg-gray-50">
-      <div className="container mx-auto px-4">
-        <div className="text-center mb-16">
-          <h2 className="text-3xl md:text-4xl font-bold mb-4">Our Services</h2>
-          <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-            We offer a comprehensive range of design and architectural services to bring your vision to life.
-          </p>
+    <section id="services" className="py-24 bg-[#0b0c0e] relative overflow-hidden">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        
+        {/* Section Header */}
+        <div className="flex flex-col md:flex-row md:items-end justify-between mb-16">
+          <div className="max-w-2xl">
+            <span className="text-[11px] font-mono tracking-[0.25em] text-amber-300 uppercase">
+              {"// Studio Disciplines"}
+            </span>
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-light text-white tracking-tight mt-2">
+              Comprehensive Architectural <span className="font-serif italic text-gold-gradient">& Interior Scope</span>
+            </h2>
+            <p className="text-sm sm:text-base text-zinc-400 mt-4 font-light leading-relaxed">
+              We provide unified end-to-end design intelligence, ensuring your sanctuary is conceived with aesthetic mastery and delivered with uncompromising precision.
+            </p>
+          </div>
+
+          <div className="mt-6 md:mt-0">
+            <Link
+              href="/contact"
+              className="inline-flex items-center space-x-2 text-xs uppercase tracking-[0.16em] font-semibold text-amber-300 hover:text-white transition-colors"
+            >
+              <span>Consult On Your Space</span>
+              <ArrowUpRight className="w-4 h-4" />
+            </Link>
+          </div>
         </div>
 
+        {/* Services Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {services.map((service) => (
-            <div 
-              key={service.id} 
-              className="bg-white p-8 rounded-lg shadow-md hover:shadow-lg transition duration-300 flex flex-col"
-            >
-              <div className="mb-4">
-                {service.icon}
-              </div>
-              <h3 className="text-xl font-bold mb-3">{service.title}</h3>
-              <p className="text-gray-600 mb-6 flex-grow">{service.description}</p>
-              <Link 
-                href="/services" 
-                className="text-blue-600 font-medium hover:text-blue-800 transition duration-300 inline-flex items-center"
+          {services.map((service, index) => {
+            const Icon = service.icon;
+            return (
+              <motion.div
+                key={service.id}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-50px" }}
+                transition={{ duration: 0.5, delay: index * 0.08 }}
+                className="group relative rounded-2xl overflow-hidden bg-[#121418] border border-white/[0.08] hover:border-amber-300/40 transition-all duration-500 flex flex-col justify-between"
               >
-                Learn more
-                <svg className="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
-                </svg>
-              </Link>
-            </div>
-          ))}
+                <div>
+                  {/* Top Render Visual Preview */}
+                  <div className="relative aspect-[16/9] w-full overflow-hidden bg-zinc-900">
+                    <Image
+                      src={service.image}
+                      alt={service.title}
+                      fill
+                      sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                      className="object-cover object-center transition-transform duration-700 group-hover:scale-105"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-[#121418] via-black/40 to-transparent" />
+                    
+                    {/* Icon floating badge */}
+                    <div className="absolute bottom-3 left-4 p-2.5 rounded-xl bg-black/70 backdrop-blur-md border border-white/10 text-amber-300">
+                      <Icon className="w-4 h-4" />
+                    </div>
+                  </div>
+
+                  {/* Body Content */}
+                  <div className="p-6">
+                    <span className="text-[10px] font-mono tracking-wider text-amber-300/90 uppercase">
+                      {service.subtitle}
+                    </span>
+                    <h3 className="text-xl font-medium text-white tracking-tight mt-1 mb-3 group-hover:text-amber-200 transition-colors">
+                      {service.title}
+                    </h3>
+                    <p className="text-xs sm:text-sm text-zinc-400 font-light leading-relaxed mb-6">
+                      {service.description}
+                    </p>
+
+                    {/* Features list */}
+                    <div className="space-y-1.5 pt-4 border-t border-white/[0.06]">
+                      {service.features.map((feat, fIdx) => (
+                        <div key={fIdx} className="flex items-center space-x-2 text-xs text-zinc-300">
+                          <span className="w-1 h-1 rounded-full bg-amber-400" />
+                          <span>{feat}</span>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+
+                {/* Card Action Link */}
+                <div className="p-6 pt-0 mt-4">
+                  <Link
+                    href="/contact"
+                    className="inline-flex items-center space-x-2 text-xs uppercase tracking-wider font-semibold text-zinc-300 group-hover:text-amber-300 transition-colors"
+                  >
+                    <span>Request Proposal</span>
+                    <ArrowUpRight className="w-3.5 h-3.5 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
+                  </Link>
+                </div>
+              </motion.div>
+            );
+          })}
         </div>
+
       </div>
     </section>
   );

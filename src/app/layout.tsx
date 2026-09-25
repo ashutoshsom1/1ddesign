@@ -1,22 +1,17 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
-
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
+import SmoothScrollProvider from "@/components/common/SmoothScrollProvider";
+import FloatingContactBar from "@/components/common/FloatingContactBar";
 
 export const metadata: Metadata = {
-  title: "1D-Design Studio | Architecture & Interior Design",
-  description: "Premium architecture and interior design services for residential and commercial spaces.",
+  title: "1 Dream Design Studio | Bespoke Architecture & Turnkey Interiors",
+  description:
+    "Bespoke architecture and interior design firm specializing in contemporary villas, emerald marble master suites, and 1:1 photorealistic 3D turnkey execution.",
+  icons: {
+    icon: "/favicon.ico",
+  },
 };
 
 export default function RootLayout({
@@ -25,19 +20,19 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" className="dark scroll-smooth">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className="antialiased bg-[#0b0c0e] text-zinc-100 selection:bg-amber-300 selection:text-black min-h-screen flex flex-col justify-between"
       >
-        <Navbar />
-        <div className="pt-16">
-          {children}
-        </div>
-        <Footer />
+        <SmoothScrollProvider>
+          <Navbar />
+          <div className="flex-1 w-full">
+            {children}
+          </div>
+          <Footer />
+          <FloatingContactBar />
+        </SmoothScrollProvider>
       </body>
     </html>
   );
 }
-
-
-

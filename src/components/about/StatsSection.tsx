@@ -1,37 +1,22 @@
-import React from 'react';
-
-const stats = [
-  {
-    id: 1,
-    value: '10+',
-    label: 'Years Experience',
-  },
-  {
-    id: 2,
-    value: '50+',
-    label: 'Projects Completed',
-  },
-  {
-    id: 3,
-    value: '10+',
-    label: 'Awards Won',
-  },
-  {
-    id: 4,
-    value: '100%',
-    label: 'Client Satisfaction',
-  },
-];
+import React from "react";
+import { statistics } from "@/data/projectsData";
 
 export default function StatsSection() {
   return (
-    <section className="py-16 bg-blue-600 text-white">
-      <div className="container mx-auto px-4">
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
-          {stats.map((stat) => (
-            <div key={stat.id} className="p-6">
-              <div className="text-4xl md:text-5xl font-bold mb-2">{stat.value}</div>
-              <div className="text-lg opacity-80">{stat.label}</div>
+    <section className="py-20 bg-[#0e1014] border-y border-white/[0.08]">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-8 text-center">
+          {statistics.map((stat, idx) => (
+            <div key={idx} className="p-4">
+              <div className="text-4xl sm:text-5xl font-light font-serif text-amber-300 tracking-tight mb-2">
+                {stat.value}
+              </div>
+              <div className="text-xs uppercase tracking-[0.18em] font-medium text-white mb-1">
+                {stat.label}
+              </div>
+              <div className="text-[11px] font-mono text-zinc-500">
+                {stat.detail}
+              </div>
             </div>
           ))}
         </div>
@@ -39,4 +24,3 @@ export default function StatsSection() {
     </section>
   );
 }
-
